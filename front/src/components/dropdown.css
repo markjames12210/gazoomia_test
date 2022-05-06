@@ -1,0 +1,28 @@
+.dropdown-box {
+  width: 340px;
+  margin:auto;
+  border: 1px solid lightgray;
+}
+.dropdown-box .type{
+  -webkit-box-align: center;
+  align-items: center;
+  border-radius: 10px;
+  border-top: 1px solid rgb(229, 232, 235);
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px;
+  user-select: none;
+  background-color: rgb(255, 255, 255);
+  justify-content: space-between;
+}
+.left-part, .right-part {
+  display: flex;
+  align-items: center;
+}
+.list-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+}

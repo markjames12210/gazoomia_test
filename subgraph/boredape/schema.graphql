@@ -1,0 +1,40 @@
+
+type _Schema_
+  @fulltext(
+    name: "tokenSearch"
+    language: en
+    algorithm: rank
+    include: [{
+      entity: "Token",
+      fields: [
+        { name: "eyes" }, { name: "background" }, { name: "hat" }, { name: "mouth" },
+        { name: "clothes" }, { name: "fur" }, { name: "earring" }, { name: "collection" }
+      ]
+    }]
+  )
+
+type Token @entity {
+  id: ID!
+  tokenID: BigInt!
+  contentURI: String!
+  imageURI: String
+  baseURI: String
+  createdAtTimestamp: BigInt!
+  updatedAtTimestamp: BigInt
+  collection: String!
+  eyes: String
+  background: String
+  hat: String
+  mouth: String
+  clothes: String
+  fur: String
+  earring: String
+  creator: User!
+  owner: User!
+}
+
+type User @entity {
+  id: ID!
+  tokens: [Token!]! @derivedFrom(field: "owner")
+  created: [Token!]! @derivedFrom(field: "creator")
+}
