@@ -20,7 +20,6 @@ query {
 		where: {
 			collection: "Bored Ape Yacht Club"
 		},
-		first: 10
 	) {
 		id
 		tokenID
