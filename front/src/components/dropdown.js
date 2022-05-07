@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './dropdown.css';
 import { AiOutlineUnorderedList, AiOutlineDown, AiOutlineRight } from 'react-icons/ai';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-import { groupBy, pickBy, isEmpty } from "lodash";
+import { groupBy, pickBy, isEmpty, cloneDeep } from "lodash";
 
 const token_keys = [
 	"background",
@@ -20,6 +20,7 @@ query {
 		where: {
 			collection: "Bored Ape Yacht Club"
 		},
+		first: 1000
 	) {
 		id
 		tokenID
@@ -57,19 +58,16 @@ class DropDown extends Component {
 	
 	analysisData = (data) => {
 		if (isEmpty(data)) return;
-		const tokens = data.tokens;
+		const tokens = cloneDeep(data.tokens);
 		let {isOpen} = this.state;
 		let result = {};
-		tokens.map(item=>{
-			Object.keys(item).map(index=>{
-				if(!isEmpty(item[index]) && item[index].includes("M1 ")) item[index].replace("M1 ", "");
-				if(!isEmpty(item[index]) && item[index].includes("M2 ")) item[index].replace("M2 ", "");
-				return item[index];
-			})
-			return item;
-		});
+		let string_tokens = JSON.stringify(tokens);
+		string_tokens = string_tokens.split("M1 ").join("");
+		string_tokens = string_tokens.split("M2 ").join("");
+		let array_token = JSON.parse(string_tokens);
+		
 		token_keys.map(item=>{
-			let group_item = groupBy(tokens, item);
+			let group_item = groupBy(array_token, item);
 			isOpen[item] = false;
 			result[item] = pickBy(group_item, (_value, key)=>{
 				return key !== "null";
