@@ -13,6 +13,7 @@ Goal in this test is to populate Bored Ape Yatch Club collection assets, display
 ## Considerations:
 
 ● You can use any API to achieve this goal as long as data is not hardcoded.
+
 ● We DON'T/CAN'T provide Api keys due to privacy, if you have for example OpenSea's API key, use it with env variables and we will run it with our API key.
 
 ## Evaluation:
